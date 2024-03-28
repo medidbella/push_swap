@@ -6,21 +6,25 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:10:43 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/25 17:24:22 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/28 02:19:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_stack(t_stack *stk)
+void	swap_stack(t_stack *stk, int who)
 {
-	int	tmp;
+	t_blk	tmp;
 
 	if (stk->size <= 1)
 		return ;
-	tmp = stk->arr[0];
-	stk->arr[0] = stk->arr[1];
-	stk->arr[1] = tmp;
+	tmp = stk->tab[0];
+	stk->tab[0] = stk->tab[1];
+	stk->tab[1] = tmp;
+	if (who == 1)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }
 
 void	expand_stack(t_stack *stk)
@@ -30,55 +34,67 @@ void	expand_stack(t_stack *stk)
 	i = stk->size;
 	while (i != 0)
 	{
-		stk->arr[i] = stk->arr[i - 1];
+		stk->tab[i] = stk->tab[i - 1];
 		i--;
 	}
 }
 
-void	p_stack(t_stack *from, t_stack *to)
+void	p_stack(t_stack *from, t_stack *to, int who)
 {
-	int	i;
-	int	tmp;
+	int		i;
+	t_blk	tmp;
 
 	i = 0;
-	tmp = from->arr[0];
+	tmp = from->tab[0];
 	while (i < from->size - 1)
 	{
-		from->arr[i] = from->arr[i + 1];
+		from->tab[i] = from->tab[i + 1];
 		i++;
 	}
 	from->size--;
 	to->size++;
 	expand_stack(to);
-	to->arr[0] = tmp;
+	to->tab[0] = tmp;
+	if (who == 2)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }
 
-void	r_stack(t_stack *stk)
+void	r_stack(t_stack *stk, int who)
 {
-	int	tmp;
+	t_blk	tmp;
 	int	i;
 
 	i = 0;
-	tmp = stk->arr[0];
+	tmp = stk->tab[0];
 	while (i < stk->size - 1)
 	{
-		stk->arr[i] = stk->arr[i + 1];
+		stk->tab[i] = stk->tab[i + 1];
 		i++;
 	}
-	stk->arr[stk->size - 1] = tmp;
+	stk->tab[stk->size - 1] = tmp;
+	if (who == 1)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }
 
-void	rev_r_stack(t_stack *stk)
+void	rev_r_stack(t_stack *stk, int who)
 {
-	int	tmp;
+	t_blk	tmp;
 	int	i;
 
-	tmp = stk->arr[stk->size - 1];
+	tmp = stk->tab[stk->size - 1];
 	i = stk->size - 1;
 	while (i > 0)
 	{
-		stk->arr[i] = stk->arr[i - 1];
+		stk->tab[i] = stk->tab[i - 1];
 		i--;
 	}
-	stk->arr[0] = tmp;
+	stk->tab[0] = tmp;
+	if (who == 1)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }

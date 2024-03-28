@@ -6,24 +6,40 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 00:18:17 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/25 17:22:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:56:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_what(char c, int wich)
+void	ranker(t_blk *blk, int size)
 {
-	if (wich == 1)
-		return (c == 32 || (c >= 9 && c <= 13));
-	else if (wich == 0)
-		return (c == '+' || c == '-');
-	else if (wich == 2)
-		return (c <= '9' && c >= '0');
-	else
-		return ((c == '+' || c == '-')
-			|| (c <= '9' && c >= '0'));
+	int j;
+	int	i;
+	int	tmp;
+
+	i = -1;
+	while (i++ < size)
+		blk[i].rank = i;
+	i = 0;
+	while (i < size)
+	{
+		j = i;
+		while (j < size)
+		{
+			if ((blk[i].num > blk[j].num && blk[i].rank < blk[j].rank) || 
+				(blk[i].num < blk[j].num && blk[i].rank > blk[j].rank))
+			{
+				tmp = blk[i].rank;
+				blk[i].rank = blk[j].rank;
+				blk[j].rank = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
+
 
 int	number_checker(int nb, char **strs)
 {

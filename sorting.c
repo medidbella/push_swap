@@ -6,50 +6,44 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/20 01:49:32 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/28 02:31:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void pull_up(t_stack *a, int index, int nb)
+void	mini_sort(t_stack *a, t_stack *b)
 {
-	if (a->size / 2 >= (index + 1))
-		while (a->arr[0] != nb)
-		{
-			r_stack(a);
-			printf("ra\n");
-		}
-	else 
-		while (a->arr[0] != nb)
-		{
-			rev_r_stack(a);
-			printf("rra\n");
-		}
-}
-
-void	first_idea(t_stack *a, t_stack *b)
-{
-	int	s;
 	int i;
 
-	while (a->size != 0)
+	i = 0;
+	if (a->size == 3)
 	{
-		s = 0; 
-		i = 1;
-		while (i < a->size)
-		{
-			if (a->arr[i] < a->arr[s])
-				s = i;
-			i++;
-		}
-		pull_up(a, s, a->arr[s]);
-		p_stack(a, b);
-		printf("pb\n");
+		
 	}
-	while (b->size != 0)
+}
+
+int	is_sorted(t_blk *blk, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size - 1)
 	{
-		p_stack(b, a);
-		printf("pa\n");
+		if (blk[i].num > blk[i + 1].num)
+			return (0);
+		i++;
 	}
+	return (1);
+}
+
+void	sorting(t_stack *a, t_stack *b)
+{
+	if (a->size == 2)
+	{
+		swap_stack(a, 1);
+		exit(0);
+	}
+	if (a->size < 6)
+		mini_sort(a, b);
 }

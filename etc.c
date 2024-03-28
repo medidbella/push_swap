@@ -6,11 +6,24 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/22 18:16:14 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/26 03:00:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_what(char c, int wich)
+{
+	if (wich == 1)
+		return (c == 32 || (c >= 9 && c <= 13));
+	else if (wich == 0)
+		return (c == '+' || c == '-');
+	else if (wich == 2)
+		return (c <= '9' && c >= '0');
+	else
+		return ((c == '+' || c == '-')
+			|| (c <= '9' && c >= '0'));
+}
 
 int	total_len(int n)
 {
@@ -32,7 +45,7 @@ int	total_len(int n)
 	return (i);
 }
 
-int	my_atoi(char *str, int *ptr)
+int	my_atoi(char *str, t_blk *ptr)
 {
 	int			i;
 	long long	result;
