@@ -12,15 +12,34 @@
 
 #include "push_swap.h"
 
-void	mini_sort(t_stack *a, t_stack *b)
+void	mini_sort(t_stack *a)
 {
-	int i;
+	// int i;
 
-	i = 0;
-	if (a->size == 3)
+	// i = 1;
+	// if (a->tab[0].num > a->tab[1].num)
+	// {
+	// 	if (a->tab[0].num > a->tab[2].num)
+	// 		i = 0;
+	// 	else
+	// 		i = 2;
+	// }
+	if (i == 0)
 	{
-		
+		r_stack(a, 1);
+		if (a->tab[0].num > a->tab[1].num)
+			swap_stack(a, 1);
+		return ;
 	}
+	else if (i == 1)
+	{
+		rev_r_stack(a, 1);
+		if (a->tab[0].num > a->tab[1].num)
+			swap_stack(a, 1);
+		return ;
+	}
+	if (a->tab[0].num > a->tab[1].num)
+		swap_stack(a, 1);
 }
 
 int	is_sorted(t_blk *blk, int size)
@@ -45,5 +64,5 @@ void	sorting(t_stack *a, t_stack *b)
 		exit(0);
 	}
 	if (a->size < 6)
-		mini_sort(a, b);
+		mini_sort(a);
 }
