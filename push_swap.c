@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/28 02:24:27 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:58:23 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,24 @@ void	initializer(t_stack *stk , char **strs, int nb)
 
 void print_stack(t_stack *stack)
 {
+	// int index;
 	int i;
+
+	// index = 0; 
+	// while (index < stack->size - 1)
+	// {
+	// 	if ((stack->tab[i].num < stack->tab[i + 1].num && stack->tab[i].rank > stack->tab[i + 1].rank) ||
+	// 		((stack->tab[i].num > stack->tab[i + 1].num && stack->tab[i].rank < stack->tab[i + 1].rank)))
+	// 		printf("hbass\n");
+	// 	index++;
+	// }
+	// printf("all good\n");
 	i = 0;
-	while (i <= stack->size - 1)
+	while (i < stack->size)
 	{
-		write(1 , "|num = ", 8);
-		print_nb(stack->tab[i].num);
-		write(1 , " and rank = ", 13);
-		print_nb(stack->tab[i].rank);
-		write(1 , "|\n", 2);
+		printf("rank[%d] = %d\n", i, stack->tab[i].rank);
 		i++;
 	}
-	if (i == 0)
-		printf("non\n");
 }
 
 int main(int ac, char **av)
@@ -99,8 +104,9 @@ int main(int ac, char **av)
 	initializer(&a, args, g);
 	if (g == 1 || is_sorted(a.tab, a.size))
 		return (0);
-	// ranker(a.tab, a.size);
-	// b.tab = malloc(sizeof(t_blk) * a.size);
-	// b.size = 0;
+	ranker(a.tab, a.size);
+	// print_stack(&a);
+	b.tab = malloc(sizeof(t_blk) * a.size);
+	b.size = 0;
 	sorting(&a, &b);
 }

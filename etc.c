@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/26 03:00:00 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 19:50:58 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,6 @@ int	my_atoi(char *str, t_blk *ptr)
 	return ((int)result);
 }
 
-int	print_nb(int nb)
-{
-	long	n;
-	char	s[10];
-	int		j;
-	int		tot;
-
-	tot = 0;
-	n = nb;
-	if (n < 0)
-	{
-		tot += write(1, "-", 1);
-		n = n * -1;
-	}
-	j = 0;
-	while (n >= 10)
-	{
-		s[j] = (n % 10) + 48;
-		n = n / 10;
-		j++;
-	}
-	s[j] = n + 48;
-	while (j >= 0)
-		tot += write(1, &s[j--], 1);
-	return (tot);
-}
-
 int	my_strlen(char *str)
 {
 	int	i;
@@ -114,4 +87,32 @@ int	my_strlen(char *str)
 		i++;
 	}
 	return (o);
+}
+
+//del from here
+void	ft_putnbr(int n)
+{
+	long	nb;
+	char	s[10];
+	int		j;
+
+	nb = n;
+	if (nb < 0)
+	{
+		write(1, "-", 1);
+			nb = nb * -1;
+	}
+	j = 0;
+	while (nb >= 10)
+	{
+		s[j] = (nb % 10) + 48;
+		nb = nb / 10;
+		j++;
+	}
+	s[j] = nb + 48;
+	while (j >= 0)
+	{
+		write(1, &s[j], 1);
+		j--;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:08:46 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/28 02:24:16 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 19:51:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_stack
 	int		size;
 } t_stack;
 
-int		print_nb(int nb);
 int		my_strlen(char *str);
 int		my_atoi(char *str, t_blk *ptr);
 int		total_len(int n);
@@ -48,4 +47,5 @@ int		counter(char **args, int nb);
 void	ranker(t_blk *blk, int size);
 int		is_sorted(t_blk *blk, int size);
 void	sorting(t_stack *a, t_stack *b);
+void	ft_putnbr(int n);
 #endif

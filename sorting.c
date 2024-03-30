@@ -6,32 +6,40 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/28 02:31:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 20:47:52 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	mini_sort(t_stack *a)
+void mini_sort(t_stack *a, t_stack *b)
 {
-	// int i;
+	if (a->size == 2)
+	{
+		swap_stack(a, 1);
+		exit(0);
+	}
+	return ;
+}
 
-	// i = 1;
-	// if (a->tab[0].num > a->tab[1].num)
-	// {
-	// 	if (a->tab[0].num > a->tab[2].num)
-	// 		i = 0;
-	// 	else
-	// 		i = 2;
-	// }
-	if (i == 0)
+void	micro_sort(t_stack *a)
+{
+	int i;
+	int g;
+
+	i = 0;
+	g = 0;
+	while (i++ <= 2)
+		if (a->tab[i].num > a->tab[i - 1].num)
+			g = i;
+	if (g == 0)
 	{
 		r_stack(a, 1);
 		if (a->tab[0].num > a->tab[1].num)
 			swap_stack(a, 1);
 		return ;
 	}
-	else if (i == 1)
+	else if (g == 1)
 	{
 		rev_r_stack(a, 1);
 		if (a->tab[0].num > a->tab[1].num)
@@ -56,13 +64,66 @@ int	is_sorted(t_blk *blk, int size)
 	return (1);
 }
 
+int	find_bigest(t_stack *stk)
+{
+	int result;
+	int	i;
+
+	i = 0;
+	result = 0;
+	while (i < stk->size - 1)
+	{
+		if (stk->tab[i].num < stk->tab[i + 1].num)
+			result = i + 1;
+		i++;
+	}
+	return (result);
+}
+
+int	cheap_push(t_stack *stk, t_stack *stk1, int index, int *ptr)
+{
+	int tmp;
+
+	tmp = stk->tab[index].num;
+	if (stk->size / 2 >= index + 1)
+		while (stk->tab[0].num != tmp)
+			r_stack(stk, 1);
+	else
+		while (stk->tab[0].num != tmp)
+			rev_r_stack(stk, 1);
+	if (ptr)
+	{
+		*ptr += 1;
+		p_stack(stk, stk1, 2);
+	}
+	else 
+		p_stack(stk, stk1, 1);
+	return (-1);
+}
+
 void	sorting(t_stack *a, t_stack *b)
 {
-	if (a->size == 2)
+	int	index;
+	int	rang;
+	int	def;
+
+	def = 0;
+	index = 0;
+	if (a->size <= 100)
+		rang = 15;
+	else 
+		rang = 30;
+	if (a->size == 3)
+		return (micro_sort(a));
+	else if (a->size <= 5)
+		return (mini_sort(a, b));
+	while (a->size)
 	{
-		swap_stack(a, 1);
-		exit(0);
+		if (a->tab[index].rank <= rang + def)
+			index = cheap_push(a, b, index, &def);
+		index++;
 	}
-	if (a->size < 6)
-		mini_sort(a);
+	print_stack(a);
+	// while (b->size)
+	// 	cheap_push(b, a, find_bigest(b), NULL);
 }
