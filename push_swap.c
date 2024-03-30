@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/30 17:58:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 20:56:48 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,17 @@ void	initializer(t_stack *stk , char **strs, int nb)
 
 void print_stack(t_stack *stack)
 {
-	// int index;
 	int i;
 
-	// index = 0; 
-	// while (index < stack->size - 1)
-	// {
-	// 	if ((stack->tab[i].num < stack->tab[i + 1].num && stack->tab[i].rank > stack->tab[i + 1].rank) ||
-	// 		((stack->tab[i].num > stack->tab[i + 1].num && stack->tab[i].rank < stack->tab[i + 1].rank)))
-	// 		printf("hbass\n");
-	// 	index++;
-	// }
-	// printf("all good\n");
 	i = 0;
+	if (!stack->size)
+	{
+		printf("empty\n");
+		return ;
+	}
 	while (i < stack->size)
 	{
-		printf("rank[%d] = %d\n", i, stack->tab[i].rank);
+		printf("tab[%d] = %d\n", i, stack->tab[i].num);
 		i++;
 	}
 }

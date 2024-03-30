@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/30 20:47:52 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 21:56:43 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int	find_bigest(t_stack *stk)
 	int result;
 	int	i;
 
-	i = 0;
+	i = 1;
 	result = 0;
-	while (i < stk->size - 1)
+	while (i < stk->size)
 	{
-		if (stk->tab[i].num < stk->tab[i + 1].num)
-			result = i + 1;
+		if (stk->tab[result].num < stk->tab[i].num)
+			result = i;
 		i++;
 	}
 	return (result);
@@ -85,7 +85,7 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int *ptr)
 	int tmp;
 
 	tmp = stk->tab[index].num;
-	if (stk->size / 2 >= index + 1)
+	if (stk->size / 2 >= index)
 		while (stk->tab[0].num != tmp)
 			r_stack(stk, 1);
 	else
@@ -123,7 +123,11 @@ void	sorting(t_stack *a, t_stack *b)
 			index = cheap_push(a, b, index, &def);
 		index++;
 	}
+	while (b->size)
+		cheap_push(b, a, find_bigest(b), NULL);
 	print_stack(a);
-	// while (b->size)
-	// 	cheap_push(b, a, find_bigest(b), NULL);
+	if (is_sorted(a->tab, a->size) == 1)
+		write(1, "sorted", 7);
+	else 
+		write(1, "not sorted", 11);
 }
