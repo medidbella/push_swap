@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void mini_sort(t_stack *a, t_stack *b)
+void mini_sort(t_stack *a)
 {
 	if (a->size == 2)
 	{
@@ -82,15 +82,20 @@ int	find_bigest(t_stack *stk)
 
 int	cheap_push(t_stack *stk, t_stack *stk1, int index, int *ptr)
 {
+	int who;
 	int tmp;
 
+	if (ptr)
+		who = 1;
+	else
+		who = 2;
 	tmp = stk->tab[index].num;
 	if (stk->size / 2 >= index)
 		while (stk->tab[0].num != tmp)
-			r_stack(stk, 1);
+			r_stack(stk, who);
 	else
 		while (stk->tab[0].num != tmp)
-			rev_r_stack(stk, 1);
+			rev_r_stack(stk, who);
 	if (ptr)
 	{
 		*ptr += 1;
@@ -127,7 +132,7 @@ void	sorting(t_stack *a, t_stack *b)
 	if (a->size == 3)
 		return (micro_sort(a));
 	else if (a->size <= 5)
-		return (mini_sort(a, b));
+		return (mini_sort(a));
 	while (a->size)
 	{
 		if (a->tab[index].rank <= rang + def)
@@ -136,9 +141,4 @@ void	sorting(t_stack *a, t_stack *b)
 	}
 	while (b->size)
 		cheap_push(b, a, find_bigest(b), NULL);
-	// print_stack(a);
-	// if (is_sorted(a->tab, a->size) == 1)
-	// 	write(1, "sorted", 7);
-	// else 
-	// 	write(1, "not sorted", 11);
 }

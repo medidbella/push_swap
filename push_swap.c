@@ -57,9 +57,9 @@ void	initializer(t_stack *stk , char **strs, int nb)
 	}
 	double_check(stk);
 	i = 0;
-	while (i < nb)
-		free(strs[i++]);
-	free(strs);
+	// while (i < nb)
+	// 	free(strs[i++]);
+	// free(strs);
 }
 
 int main(int ac, char **av)
@@ -75,8 +75,8 @@ int main(int ac, char **av)
 	if (ac == 1)
 		return (0);
 	args = my_split(av, ac - 1);
-	int i = 0;
 	g = counter(av, ac - 1);
+
 	if (!number_checker(g - 1, args))
 		error_handler(args);
 	initializer(&a, args, g);
