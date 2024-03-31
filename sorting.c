@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/30 21:56:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/31 00:15:04 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,17 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int *ptr)
 	return (-1);
 }
 
+void print_stack(t_stack *stack)
+{
+	int i;
+
+	i = 0;
+	while (i < stack->size)
+	{
+		printf("tab[%d] = %d\n", i, stack->tab[i].num);
+		i++;
+	}
+}
 void	sorting(t_stack *a, t_stack *b)
 {
 	int	index;
@@ -125,9 +136,9 @@ void	sorting(t_stack *a, t_stack *b)
 	}
 	while (b->size)
 		cheap_push(b, a, find_bigest(b), NULL);
-	print_stack(a);
-	if (is_sorted(a->tab, a->size) == 1)
-		write(1, "sorted", 7);
-	else 
-		write(1, "not sorted", 11);
+	// print_stack(a);
+	// if (is_sorted(a->tab, a->size) == 1)
+	// 	write(1, "sorted", 7);
+	// else 
+	// 	write(1, "not sorted", 11);
 }

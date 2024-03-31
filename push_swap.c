@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/30 20:56:48 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/30 22:11:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,6 @@ void	initializer(t_stack *stk , char **strs, int nb)
 	free(strs);
 }
 
-void print_stack(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	if (!stack->size)
-	{
-		printf("empty\n");
-		return ;
-	}
-	while (i < stack->size)
-	{
-		printf("tab[%d] = %d\n", i, stack->tab[i].num);
-		i++;
-	}
-}
-
 int main(int ac, char **av)
 {
 	t_blk	*blk;
@@ -100,7 +83,6 @@ int main(int ac, char **av)
 	if (g == 1 || is_sorted(a.tab, a.size))
 		return (0);
 	ranker(a.tab, a.size);
-	// print_stack(&a);
 	b.tab = malloc(sizeof(t_blk) * a.size);
 	b.size = 0;
 	sorting(&a, &b);
