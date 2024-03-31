@@ -18,9 +18,6 @@ void	ranker(t_blk *blk, int size)
 	int	i;
 	int	tmp;
 
-	i = -1;
-	while (i++ < size)
-		blk[i].rank = i;
 	i = 0;
 	while (i < size)
 	{

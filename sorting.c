@@ -80,7 +80,7 @@ int	find_bigest(t_stack *stk)
 	return (result);
 }
 
-void	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
+int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 {
 	int who;
 	int tmp;
@@ -102,6 +102,7 @@ void	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 		if (stk1->tab[0].rank <= def)
 			r_stack(stk1, 2);
 	}
+	return (-1);
 }
 
 void print_stack(t_stack *stack)
@@ -115,6 +116,7 @@ void print_stack(t_stack *stack)
 		i++;
 	}
 }
+
 void	sorting(t_stack *a, t_stack *b)
 {
 	int	index;
@@ -131,12 +133,11 @@ void	sorting(t_stack *a, t_stack *b)
 		return (micro_sort(a));
 	else if (a->size <= 5)
 		return (mini_sort(a));
-	while (a->size)
+	while (a->size != 0)
 	{
 		if (a->tab[index].rank <= rang + def)
 		{
-			cheap_push(a, b, index, def);
-			index = -1;
+			index = cheap_push(a, b, index, def);
 			def++;
 		}
 		index++;
