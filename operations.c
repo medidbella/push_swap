@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:10:43 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/30 21:59:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/31 01:15:47 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	p_stack(t_stack *from, t_stack *to, int who)
 	expand_stack(to);
 	to->tab[0] = tmp;
 	if (who == 1)
-		write(1, "pa\n", 3);
-	else
 		write(1, "pb\n", 3);
+	else
+		write(1, "pa\n", 3);
 }
 
 void	r_stack(t_stack *stk, int who)

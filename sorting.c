@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 00:15:04 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:17:56 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,28 @@ int	find_bigest(t_stack *stk)
 	return (result);
 }
 
-int	cheap_push(t_stack *stk, t_stack *stk1, int index, int *ptr)
+void	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 {
 	int who;
 	int tmp;
 
-	if (ptr)
-		who = 1;
-	else
+	if (def == -1)
 		who = 2;
+	else
+		who = 1;
 	tmp = stk->tab[index].num;
-	if (stk->size / 2 >= index)
+	if (stk->size / 2 > index)
 		while (stk->tab[0].num != tmp)
 			r_stack(stk, who);
 	else
 		while (stk->tab[0].num != tmp)
 			rev_r_stack(stk, who);
-	if (ptr)
+	p_stack(stk, stk1, who);
+	if (who == 1)
 	{
-		*ptr += 1;
-		p_stack(stk, stk1, 2);
+		if (stk1->tab[0].rank <= def)
+			r_stack(stk1, 2);
 	}
-	else 
-		p_stack(stk, stk1, 1);
-	return (-1);
 }
 
 void print_stack(t_stack *stack)
@@ -136,9 +134,13 @@ void	sorting(t_stack *a, t_stack *b)
 	while (a->size)
 	{
 		if (a->tab[index].rank <= rang + def)
-			index = cheap_push(a, b, index, &def);
+		{
+			cheap_push(a, b, index, def);
+			index = -1;
+			def++;
+		}
 		index++;
 	}
 	while (b->size)
-		cheap_push(b, a, find_bigest(b), NULL);
+		cheap_push(b, a, find_bigest(b), -1);
 }
