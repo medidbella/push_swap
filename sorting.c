@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 18:17:56 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:41:23 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 		while (stk->tab[0].num != tmp)
 			rev_r_stack(stk, who);
 	p_stack(stk, stk1, who);
-	// if (who == 1)
-	// {
-	// 	if (stk1->tab[0].rank <= def)
-	// 		s_stack(stk1, 2);
-	// }
+	if (who == 1)
+	{
+		if (stk1->tab[0].rank <= def)
+			swap_stack(stk1, 2);
+	}
 	return (-1);
 }
 
@@ -135,7 +135,7 @@ void	sorting(t_stack *a, t_stack *b)
 		return (mini_sort(a));
 	while (a->size != 0)
 	{
-		if (a->tab[index].rank <= rang + def)
+		if (a->tab[index].rank <= (rang + def))
 		{
 			index = cheap_push(a, b, index, def);
 			def++;
