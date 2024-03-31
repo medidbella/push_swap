@@ -80,29 +80,35 @@ int	find_bigest(t_stack *stk)
 	return (result);
 }
 
-int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
+int	cheap_push_to_b(t_stack *stk, t_stack *stk1, int index, int def)
 {
-	int who;
 	int tmp;
 
-	if (def == -1)
-		who = 2;
-	else
-		who = 1;
 	tmp = stk->tab[index].num;
 	if (stk->size / 2 > index)
 		while (stk->tab[0].num != tmp)
-			r_stack(stk, who);
+			r_stack(stk, 1);
 	else
 		while (stk->tab[0].num != tmp)
-			rev_r_stack(stk, who);
-	p_stack(stk, stk1, who);
-	// if (who == 1)
-	// {
-	// 	if (stk1->tab[0].rank <= def)
-	// 		s_stack(stk1, 2);
-	// }
+			rev_r_stack(stk, 1);
+	p_stack(stk, stk1, 1);
+	if (stk1->tab[0].rank <= def)
+			r_stack(stk1, 2);
 	return (-1);
+}
+
+void	cheap_push_to_a(t_stack *stk, t_stack *stk1, int index)
+{
+	int tmp;
+
+	tmp = stk->tab[index].num;
+	if (stk->size / 2 > index)
+		while (stk->tab[0].num != tmp)
+			r_stack(stk, 2);
+	else
+		while (stk->tab[0].num != tmp)
+			rev_r_stack(stk, 2);
+	p_stack(stk, stk1, 2);
 }
 
 void print_stack(t_stack *stack)
@@ -137,11 +143,11 @@ void	sorting(t_stack *a, t_stack *b)
 	{
 		if (a->tab[index].rank <= rang + def)
 		{
-			index = cheap_push(a, b, index, def);
+			index = cheap_push_to_b(a, b, index, def);
 			def++;
 		}
 		index++;
 	}
 	while (b->size)
-		cheap_push(b, a, find_bigest(b), -1);
+		cheap_push_to_a(b, a, find_bigest(b));
 }
