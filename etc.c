@@ -21,8 +21,7 @@ int	is_what(char c, int wich)
 	else if (wich == 2)
 		return (c <= '9' && c >= '0');
 	else
-		return ((c == '+' || c == '-')
-			|| (c <= '9' && c >= '0'));
+		return ((c == '+' || c == '-') || (c <= '9' && c >= '0'));
 }
 
 int	total_len(int n)
@@ -89,7 +88,7 @@ int	my_strlen(char *str)
 	return (o);
 }
 
-void error_handler(char	**strs, t_blk *free_me)
+void	error_handler(char **strs, t_blk *free_me)
 {
 	int	i;
 
@@ -99,32 +98,4 @@ void error_handler(char	**strs, t_blk *free_me)
 	free(free_me);
 	write(2, "Error\n", 7);
 	exit(1);
-}
-
-//del from here
-void	ft_putnbr(int n)
-{
-	long	nb;
-	char	s[10];
-	int		j;
-
-	nb = n;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-			nb = nb * -1;
-	}
-	j = 0;
-	while (nb >= 10)
-	{
-		s[j] = (nb % 10) + 48;
-		nb = nb / 10;
-		j++;
-	}
-	s[j] = nb + 48;
-	while (j >= 0)
-	{
-		write(1, &s[j], 1);
-		j--;
-	}
 }

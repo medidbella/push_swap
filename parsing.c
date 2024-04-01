@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 23:34:27 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:20:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	double_check(t_stack *stk)
 {
-	int start;
+	int	start;
 	int	i;
-	int iter;
+	int	iter;
 
 	start = 0;
 	while (start < stk->size - 1)
@@ -34,7 +34,7 @@ void	double_check(t_stack *stk)
 	}
 }
 
-void	initializer(t_stack *stk , char **strs, int nb)
+void	initializer(t_stack *stk, char **strs, int nb)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ void	initializer(t_stack *stk , char **strs, int nb)
 	i = 0;
 	while (i < nb)
 	{
-		stk->tab[i].rank = i;
+		stk->tab[i].rank = -1;
 		i++;
 	}
 	i = 0;
@@ -54,9 +54,61 @@ void	initializer(t_stack *stk , char **strs, int nb)
 		stk->tab[i].num = my_atoi(strs[i], stk->tab);
 		i++;
 	}
+	free_args(strs, nb);
 	double_check(stk);
+}
+
+int	number_checker(int nb, char **strs)
+{
+	int	j;
+	int	i;
+	int	sign;
+
+	j = 0;
+	while (j <= nb)
+	{
+		if (strs[j][0] == '\0')
+			return (0);
+		sign = 0;
+		i = 0;
+		while (strs[j][i])
+		{
+			if (is_what(strs[j][i], 0) && sign > 0)
+				return (0);
+			if (is_what(strs[j][i], 3))
+				sign++;
+			else
+				return (0);
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
+
+int	is_sorted(t_blk *blk, int size)
+{
+	int	i;
+
 	i = 0;
-	while (i < nb)
-		free(strs[i++]);
-	free(strs);
+	while (i < size - 1)
+	{
+		if (blk[i].num > blk[i + 1].num)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	free_args(char **args, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		free(args[i++]);
+		i++;
+	}
+	free(args);
 }

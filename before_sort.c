@@ -6,88 +6,68 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 00:18:17 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/27 02:56:00 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:36:55 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ranker(t_blk *blk, int size)
+int	get_smalles_hepler(t_blk *blk, int size, int *index)
 {
-	int j;
 	int	i;
-	int	tmp;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (i < size)
 	{
-		j = i;
-		while (j < size)
+		if (blk[i].rank == -1)
 		{
-			if ((blk[i].num > blk[j].num && blk[i].rank < blk[j].rank) || 
-				(blk[i].num < blk[j].num && blk[i].rank > blk[j].rank))
-			{
-				tmp = blk[i].rank;
-				blk[i].rank = blk[j].rank;
-				blk[j].rank = tmp;
-			}
 			j++;
+			*index = i;
 		}
 		i++;
 	}
+	return (j);
 }
 
-
-int	number_checker(int nb, char **strs)
+int	get_smallest(t_blk *blk, int size)
 {
-	int	j;
+	int	index;
 	int	i;
-	int	sign;
+	int	j;
 
+	j = get_smalles_hepler(blk, size, &index);
+	if (j == 1)
+		return (index);
+	else if (j == 0)
+		return (-1);
 	j = 0;
-	while (j <= nb)
+	i = 0;
+	while (j < size)
 	{
-		if (strs[j][0] == '\0')
-			return (0);
-		sign = 0;
-		i = 0;
-		while (strs[j][i])
-		{
-			if (is_what(strs[j][i], 0) && sign > 0)
-				return (0);
-			if (is_what(strs[j][i], 3))
-				sign++;
-			else
-				return (0);
-			i++;
-		}
+		if ((blk[i].num > blk[j].num || blk[i].rank != -1)
+			&& (blk[j].rank == -1))
+			i = j;
 		j++;
 	}
-	return (1);
+	return (i);
 }
 
-int	counter(char **args, int nb)
+void	ranker(t_blk *blk, int size)
 {
-	int	count;
-	int	i;
-	int	j;
+	int	stp;
+	int	r;
 
-	j = 1;
-	count = 0;
-	while (j <= nb)
+	r = 0;
+	while (1)
 	{
-		i = 0;
-		if (!is_what(args[j][0], 1))
-			count++;
-		while (args[j][i])
-		{
-			if (!is_what(args[j][i], 1) && is_what(args[j][i - 1], 1))
-				count++;
-			i++;
-		}
-		j++;
+		stp = get_smallest(blk, size);
+		if (stp == -1)
+			break ;
+		blk[stp].rank = r;
+		r++;
 	}
-	return (count);
 }
 
 char	*split_and_fill(char *arg, int *ptr)

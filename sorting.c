@@ -6,70 +6,15 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 21:41:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:49:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	micro_sort(t_stack *a)
-{
-	int i;
-	int g;
-
-	i = 0;
-	g = 0;
-	while (i++ <= 2)
-		if (a->tab[i].num > a->tab[i - 1].num)
-			g = i;
-	if (g == 0)
-	{
-		r_stack(a, 1);
-		if (a->tab[0].num > a->tab[1].num)
-			swap_stack(a, 1);
-		return ;
-	}
-	else if (g == 1)
-	{
-		rev_r_stack(a, 1);
-		if (a->tab[0].num > a->tab[1].num)
-			swap_stack(a, 1);
-		return ;
-	}
-	if (a->tab[0].num > a->tab[1].num)
-		swap_stack(a, 1);
-	exit(0);
-}
-
-void mini_sort(t_stack *a)
-{
-	if (a->size == 3)
-		micro_sort(a);
-	if (a->size == 2)
-	{
-		swap_stack(a, 1);
-		exit(0);
-	}
-	return ;
-}
-
-int	is_sorted(t_blk *blk, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (blk[i].num > blk[i + 1].num)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	find_bigest(t_stack *stk)
 {
-	int result;
+	int	result;
 	int	i;
 
 	i = 1;
@@ -85,8 +30,8 @@ int	find_bigest(t_stack *stk)
 
 int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 {
-	int who;
-	int tmp;
+	int	who;
+	int	tmp;
 
 	if (def == -1)
 		who = 2;
@@ -105,27 +50,9 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 	if (who == 1)
 	{
 		if (stk1->tab[0].rank <= def)
-			swap_stack(stk1, 2);
+			r_stack(stk1, 2);
 	}
 	return (-1);
-}
-
-void print_stack(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	write(1, "________________\n", 17);
-	while (i < stack->size)
-	{
-		write(1, "tab[", 4);
-		ft_putnbr(i);
-		write(1, "] = ", 4);
-		ft_putnbr(stack->tab[i].num);
-		write(1, "\n", 1);
-		i++;
-	}
-	write(1,"________________\n", 17);
 }
 
 int	best_choice(t_stack *stk, int rang)
@@ -156,7 +83,7 @@ void	sorting(t_stack *a, t_stack *b)
 	if (a->size <= 100)
 		rang = 15;
 	else
-		rang = 30;
+		rang = 25;
 	if (a->size <= 5)
 		return (mini_sort(a));
 	while (a->size > 0)

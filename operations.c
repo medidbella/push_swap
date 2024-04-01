@@ -64,7 +64,7 @@ void	p_stack(t_stack *from, t_stack *to, int who)
 void	r_stack(t_stack *stk, int who)
 {
 	t_blk	tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	tmp = stk->tab[0];
@@ -83,7 +83,7 @@ void	r_stack(t_stack *stk, int who)
 void	rev_r_stack(t_stack *stk, int who)
 {
 	t_blk	tmp;
-	int	i;
+	int		i;
 
 	tmp = stk->tab[stk->size - 1];
 	i = stk->size - 1;
