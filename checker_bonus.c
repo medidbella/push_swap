@@ -29,4 +29,5 @@ int main(int ac, char **av)
 	initializer(&a, args, j);
 	b.tab = malloc(sizeof(t_blk) * a.size);
 	b.size = 0;
+	args = read_stdin();
 }
