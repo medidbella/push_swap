@@ -97,15 +97,10 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 		while (stk->tab[0].num != tmp)
 			r_stack(stk, who);
 	else
+	{
 		while (stk->tab[0].num != tmp)
-		{
-			write(1, "\n", 1);
-			ft_putnbr(stk->tab[0].num);
-			write(1, "\n", 1);
 			rev_r_stack(stk, who);
-			write(1, "\n", 1);
-			ft_putnbr(tmp);
-		}
+	}
 	p_stack(stk, stk1, who);
 	if (who == 1)
 	{
@@ -120,13 +115,17 @@ void print_stack(t_stack *stack)
 	int i;
 
 	i = 0;
-	printf( "________________\n");
+	write(1, "________________\n", 17);
 	while (i < stack->size)
 	{
-		printf("tab[%d] = %d\n", i, stack->tab[i].num);
+		write(1, "tab[", 4);
+		ft_putnbr(i);
+		write(1, "] = ", 4);
+		ft_putnbr(stack->tab[i].num);
+		write(1, "\n", 1);
 		i++;
 	}
-	printf( "________________\n");
+	write(1,"________________\n", 17);
 }
 
 int	best_choice(t_stack *stk, int rang)
@@ -135,7 +134,7 @@ int	best_choice(t_stack *stk, int rang)
 	int	index2;
 
 	index1 = 0;
-	index2 = stk->size;
+	index2 = stk->size - 1;
 	while (1)
 	{
 		if (stk->tab[index1].rank <= rang)
@@ -162,7 +161,6 @@ void	sorting(t_stack *a, t_stack *b)
 		return (mini_sort(a));
 	while (a->size > 0)
 	{
-		ft_putnbr(best_choice(a, rang + def));
 		cheap_push(a, b, best_choice(a, rang + def), def);
 		def++;
 	}
