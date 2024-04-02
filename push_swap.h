@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:08:46 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/01 22:43:17 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:11:19 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void		double_check(t_stack *stk);
 void		mini_sort(t_stack *a);
 void		micro_sort(t_stack *a);
 void		free_args(char **args, int size);
+int			find_bigest(t_stack *stk);
 
 #endif

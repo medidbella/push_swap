@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:27:53 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/01 23:55:49 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:11:36 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,9 @@ int	counter(char **args, int nb)
 
 void	micro_sort(t_stack *a)
 {
-	int	i;
 	int	g;
 
-	i = 0;
-	g = 0;
-	while (i++ <= 2)
-		if (a->tab[i].num > a->tab[i - 1].num)
-			g = i;
-	printf("\n%d\n", g);
+	g = find_bigest(a);
 	if (g == 0)
 	{
 		rev_r_stack(a, 1);
