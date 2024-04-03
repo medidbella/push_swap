@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 18:20:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:15:22 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 	else
 		who = 1;
 	tmp = stk->tab[index].num;
-	if (stk->size / 2 > index)
+	if (stk->size / 2 >= index)
 		while (stk->tab[0].num != tmp)
 			r_stack(stk, who);
 	else
 	{
 		while (stk->tab[0].num != tmp)
-			rev_r_stack(stk, who);
-	}
+	
 	p_stack(stk, stk1, who);
 	if (who == 1)
 	{
@@ -55,21 +54,16 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 	return (-1);
 }
 
-int	best_choice(t_stack *stk, int rang)
+int	in_rang(t_stack *stk, int rang)
 {
 	int	index1;
-	int	index2;
 
 	index1 = 0;
-	// index2 = stk->size - 1;
 	while (1)
 	{
 		if (stk->tab[index1].rank <= rang)
 			return (index1);
-		// else if (stk->tab[index2].rank <= rang)
-		// 	return (index2);
 		index1++;
-		// index2--;
 	}
 	return (0);
 }
@@ -84,11 +78,11 @@ void	sorting(t_stack *a, t_stack *b)
 		rang = 15;
 	else
 		rang = 25;
-	if (a->size <= 5)
+	if (a->size <= 3)
 		return (mini_sort(a));
 	while (a->size > 0)
 	{
-		cheap_push(a, b, best_choice(a, rang + def), def);
+		cheap_push(a, b, in_rang(a, rang + def), def);
 		def++;
 	}
 	while (b->size)

@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 23:25:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:47:27 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	my_atoi(char *str, t_blk *ptr)
 	}
 	result *= sign;
 	if (result >= P_LIM || result <= N_LIM)
-		error_handler(NULL, ptr);
+		delete(NULL, ptr, 0);
 	return ((int)result);
 }
 
@@ -88,7 +88,7 @@ int	my_strlen(char *str)
 	return (o);
 }
 
-void	error_handler(char **strs, t_blk *free_me)
+void	delete(char **strs, t_blk *free_me, int state)
 {
 	int	i;
 
@@ -96,6 +96,7 @@ void	error_handler(char **strs, t_blk *free_me)
 	while (strs && strs[i])
 		free(strs[i++]);
 	free(free_me);
-	write(2, "Error\n", 7);
+	if (state == 0)
+		write(1, "ERROR\n", 7);
 	exit(1);
 }
