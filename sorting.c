@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 18:20:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/16 09:38:11 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,11 @@ int	best_choice(t_stack *stk, int rang)
 	int	index2;
 
 	index1 = 0;
-	// index2 = stk->size - 1;
 	while (1)
 	{
 		if (stk->tab[index1].rank <= rang)
 			return (index1);
-		// else if (stk->tab[index2].rank <= rang)
-		// 	return (index2);
 		index1++;
-		// index2--;
 	}
 	return (0);
 }
