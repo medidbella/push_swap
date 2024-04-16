@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:08:46 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 21:46:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:11:19 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ typedef struct s_stack
 int			my_strlen(char *str);
 int			my_atoi(char *str, t_blk *ptr);
 int			total_len(int n);
-void		delete(char **strs, t_blk *free_me, int state);
+void		error_handler(char **strs, t_blk *free_me);
 void		swap_stack(t_stack *stk, int who);
 void		p_stack(t_stack *from, t_stack *to, int who);
 void		r_stack(t_stack *stk, int who);
 void		rev_r_stack(t_stack *stk, int who);
+void		print_stack(t_stack *stack);
 char		**my_split(char **args, int nb);
 int			number_checker(int nb, char **strs);
 int			is_what(char c, int wich);

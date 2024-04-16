@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 23:34:32 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 21:54:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:05:18 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ int	main(int ac, char **av)
 	args = my_split(av, ac - 1);
 	g = counter(av, ac - 1);
 	if (!number_checker(g - 1, args))
-		delete(args, NULL, 0);
+		error_handler(args, NULL);
 	initializer(&a, args, g);
 	if (g == 1 || is_sorted(a.tab, a.size))
 		return (0);
 	ranker(a.tab, a.size);
 	b.tab = malloc(sizeof(t_blk) * a.size);
 	b.size = 0;
-	int i;
-	i = 0;
 	sorting(&a, &b);
 }

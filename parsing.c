@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 21:54:57 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:20:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	double_check(t_stack *stk)
 		while (iter <= stk->size - 1)
 		{
 			if (stk->tab[i].num == stk->tab[iter].num)
-				delete(NULL, stk->tab, 0);
+				error_handler(NULL, stk->tab);
 			iter++;
 		}
 		start++;
@@ -50,10 +50,11 @@ void	initializer(t_stack *stk, char **strs, int nb)
 	while (i < nb)
 	{
 		if (my_strlen(strs[i]) > 12)
-			delete(NULL, stk->tab, 0);
+			error_handler(NULL, stk->tab);
 		stk->tab[i].num = my_atoi(strs[i], stk->tab);
 		i++;
 	}
+	free_args(strs, nb);
 	double_check(stk);
 }
 

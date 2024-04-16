@@ -1,1 +1,2 @@
-cc before_sort.c main.c operations.c sorting.c parsing.c etc.c sorting2.c -o push_swap
+cc before_sort.c parsing.c main.c etc.c sorting.c operations.c sorting2.c  -o push_swap
+#cc checker_bonus.c parsing.c before_sort.c etc.c  -o checker
