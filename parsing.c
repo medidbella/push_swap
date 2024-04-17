@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/01 23:20:53 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:36:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
 void	double_check(t_stack *stk)
 {
 	int	start;
-	int	i;
 	int	iter;
 
 	start = 0;
 	while (start < stk->size - 1)
 	{
-		i = start;
 		iter = start + 1;
 		while (iter <= stk->size - 1)
 		{
-			if (stk->tab[i].num == stk->tab[iter].num)
+			if (stk->tab[start].num == stk->tab[iter].num)
 				error_handler(NULL, stk->tab);
 			iter++;
 		}
@@ -39,6 +37,8 @@ void	initializer(t_stack *stk, char **strs, int nb)
 	int	i;
 
 	stk->tab = malloc(sizeof(t_blk) * (nb));
+	if (!stk->tab)
+		error_handler(strs, NULL);
 	stk->size = nb;
 	i = 0;
 	while (i < nb)
@@ -58,14 +58,14 @@ void	initializer(t_stack *stk, char **strs, int nb)
 	double_check(stk);
 }
 
-int	number_checker(int nb, char **strs)
+int	number_checker(char **strs)
 {
 	int	j;
 	int	i;
 	int	sign;
 
 	j = 0;
-	while (j <= nb)
+	while (strs[j])
 	{
 		if (strs[j][0] == '\0')
 			return (0);

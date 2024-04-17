@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   mondatory_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/31 21:43:10 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 23:52:17 by midbella         ###   ########.fr       */
+/*   Created: 2024/03/31 23:34:32 by midbella          #+#    #+#             */
+/*   Updated: 2024/04/17 20:51:25 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@ int	main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
+	int		arg_number;
 	char	**args;
-	int		j;
 
 	if (ac == 1)
 		return (0);
-	args = my_split(av, ac - 1);
-	j = counter(av, ac - 1);
-	number_checker(j - 1, args);
-	if (!number_checker(j - 1, args))
+	arg_number = counter(av, ac - 1);
+	args = my_split(av, ac - 1, arg_number);
+	if (!number_checker(args))
 		error_handler(args, NULL);
-	initializer(&a, args, j);
+	initializer(&a, args, arg_number);
+	if (arg_number == 1 || is_sorted(a.tab, a.size))
+		return (free(a.tab), 0);
+	ranker(a.tab, a.size);
 	b.tab = malloc(sizeof(t_blk) * a.size);
+	if (!b.tab)
+		error_handler(NULL, a.tab);
 	b.size = 0;
-	args = read_stdin();
+	sorting(&a, &b);
 }

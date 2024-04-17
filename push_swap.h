@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:08:46 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 18:11:19 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:26:01 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,24 @@ void		p_stack(t_stack *from, t_stack *to, int who);
 void		r_stack(t_stack *stk, int who);
 void		rev_r_stack(t_stack *stk, int who);
 void		print_stack(t_stack *stack);
-char		**my_split(char **args, int nb);
-int			number_checker(int nb, char **strs);
+char		**my_split(char **args, int nb, int c);
+int			number_checker(char **strs);
 int			is_what(char c, int wich);
 int			counter(char **args, int nb);
 void		ranker(t_blk *blk, int size);
 int			is_sorted(t_blk *blk, int size);
 void		sorting(t_stack *a, t_stack *b);
-void		ft_putnbr(int n);
 void		initializer(t_stack *stk, char **strs, int nb);
 void		double_check(t_stack *stk);
-void		mini_sort(t_stack *a);
+void		mini_sort(t_stack *a, t_stack *b);
 void		micro_sort(t_stack *a);
 void		free_args(char **args, int size);
 int			find_bigest(t_stack *stk);
+int			cheap_push(t_stack *stk, t_stack *stk1, int index, int def);
+void		checker(char **args, int index);
+int			ft_strlen(char *str);
+int			ft_strcmp(char *orig, char *comp);
+char		*mini_joiner(char *str, char add_me);
+int			get_operatoin_id(char	*my_operatoin);
 
 #endif

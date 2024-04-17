@@ -6,68 +6,63 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:27:53 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/02 18:11:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:25:55 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	counter(char **args, int nb)
+int	find_smalest(t_stack *stk)
 {
-	int	count;
+	int	result;
 	int	i;
-	int	j;
 
-	j = 1;
-	count = 0;
-	while (j <= nb)
+	i = 1;
+	result = 0;
+	while (i < stk->size)
 	{
-		i = 0;
-		if (!is_what(args[j][0], 1))
-			count++;
-		while (args[j][i])
-		{
-			if (!is_what(args[j][i], 1) && is_what(args[j][i - 1], 1))
-				count++;
-			i++;
-		}
-		j++;
+		if (stk->tab[result].num > stk->tab[i].num)
+			result = i;
+		i++;
 	}
-	return (count);
+	return (result);
 }
 
 void	micro_sort(t_stack *a)
 {
 	int	g;
 
-	g = find_bigest(a);
-	if (g == 0)
-	{
-		rev_r_stack(a, 1);
-		if (a->tab[0].num > a->tab[1].num)
-			swap_stack(a, 1);
-		return ;
-	}
-	else if (g == 1)
-	{
-		rev_r_stack(a, 1);
-		if (a->tab[0].num > a->tab[1].num)
-			swap_stack(a, 1);
-		return ;
-	}
-	if (a->tab[0].num > a->tab[1].num)
-		swap_stack(a, 1);
-	exit(0);
-}
-
-void	mini_sort(t_stack *a)
-{
-	if (a->size == 3)
-		micro_sort(a);
 	if (a->size == 2)
 	{
 		swap_stack(a, 1);
+		return ;
+	}
+	g = find_bigest(a);
+	if (g == 0)
+		r_stack(a, 1);
+	else if (g == 1)
+		rev_r_stack(a, 1);
+	if (a->tab[0].num > a->tab[1].num)
+		swap_stack(a, 1);
+	return ;
+}
+
+void	mini_sort(t_stack *a, t_stack *b)
+{
+	if (a->size <= 3)
+	{
+		micro_sort(a);
+		free(a->tab);
+		free(b->tab);
 		exit(0);
 	}
-	return ;
+	while (a->size != 3)
+		cheap_push(a, b, find_smalest(a), -37);
+	micro_sort(a);
+	if (b->tab[0].num < b->tab[1].num)
+		swap_stack(b, 2);
+	while (b->size)
+		p_stack(b, a, 2);
+	free(a->tab);
+	free(b->tab);
 }

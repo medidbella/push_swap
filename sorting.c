@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/16 09:38:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:17:58 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
 int	best_choice(t_stack *stk, int rang)
 {
 	int	index1;
-	int	index2;
 
 	index1 = 0;
 	while (1)
@@ -81,7 +80,7 @@ void	sorting(t_stack *a, t_stack *b)
 	else
 		rang = 25;
 	if (a->size <= 5)
-		return (mini_sort(a));
+		return (mini_sort(a, b));
 	while (a->size > 0)
 	{
 		cheap_push(a, b, best_choice(a, rang + def), def);
@@ -89,4 +88,6 @@ void	sorting(t_stack *a, t_stack *b)
 	}
 	while (b->size)
 		cheap_push(b, a, find_bigest(b), -1);
+	free(a->tab);
+	free(b->tab);
 }

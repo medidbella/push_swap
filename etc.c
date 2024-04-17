@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/03/31 23:25:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:19:57 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,26 @@ int	my_strlen(char *str)
 	return (o);
 }
 
-void	error_handler(char **strs, t_blk *free_me)
+int	counter(char **args, int nb)
 {
+	int	count;
 	int	i;
+	int	j;
 
-	i = 0;
-	while (strs && strs[i])
-		free(strs[i++]);
-	free(free_me);
-	write(2, "Error\n", 7);
-	exit(1);
+	j = 1;
+	count = 0;
+	while (j <= nb)
+	{
+		i = 0;
+		if (!is_what(args[j][0], 1))
+			count++;
+		while (args[j][i])
+		{
+			if (!is_what(args[j][i], 1) && is_what(args[j][i - 1], 1))
+				count++;
+			i++;
+		}
+		j++;
+	}
+	return (count);
 }

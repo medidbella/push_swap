@@ -6,13 +6,13 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 00:18:17 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/01 23:36:55 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:47:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_smalles_hepler(t_blk *blk, int size, int *index)
+int	get_smallest_hepler(t_blk *blk, int size, int *index)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ int	get_smallest(t_blk *blk, int size)
 	int	i;
 	int	j;
 
-	j = get_smalles_hepler(blk, size, &index);
+	j = get_smallest_hepler(blk, size, &index);
 	if (j == 1)
 		return (index);
 	else if (j == 0)
@@ -90,28 +90,31 @@ char	*split_and_fill(char *arg, int *ptr)
 	h = x;
 	*ptr = x;
 	res = malloc(sizeof(char) * (l + 1));
+	if (!res)
+		return (NULL);
 	res[l] = 0;
 	while (l >= 0)
 		res[--l] = arg[--h];
 	return (res);
 }
 
-char	**my_split(char **args, int nb)
+char	**my_split(char **args, int nb, int c)
 {
 	int		i;
 	char	**res;
-	int		c;
 	int		l;
 
 	i = 0;
 	l = 0;
-	c = counter(args, nb);
 	res = malloc(sizeof(char *) * (c + 1));
+	if (!res)
+		error_handler(NULL, NULL);
 	res[c] = NULL;
 	c = 1;
 	while (c <= nb)
 	{
 		res[i] = split_and_fill(args[c], &l);
+		checker(res, i);
 		while (is_what(args[c][l], 1))
 			l++;
 		if (args[c][l] == '\0')
