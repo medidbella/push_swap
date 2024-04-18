@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/16 17:19:57 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:40:09 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	total_len(int n)
 
 int	my_atoi(char *str, t_blk *ptr)
 {
-	int			i;
-	long long	result;
-	int			sign;
+	int		i;
+	long	result;
+	int		sign;
 
 	i = 0;
 	result = 0;
@@ -66,7 +66,7 @@ int	my_atoi(char *str, t_blk *ptr)
 		i++;
 	}
 	result *= sign;
-	if (result >= P_LIM || result <= N_LIM)
+	if (result > P_LIM || result < N_LIM)
 		error_handler(NULL, ptr);
 	return ((int)result);
 }

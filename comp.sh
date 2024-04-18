@@ -1,1 +1,0 @@
-cc -Wall -Wextra -Werror before_sort.c parsing.c bonus_main.c etc.c etc2.c sorting.c operations.c sorting2.c -o prog
