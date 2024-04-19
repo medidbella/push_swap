@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 12:17:58 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:24:32 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ int	find_bigest(t_stack *stk)
 	return (result);
 }
 
-int	cheap_push(t_stack *stk, t_stack *stk1, int index, int def)
+int	cheap_push(t_stack *src_stack, t_stack *dst_stack, int index, int def)
 {
-	int	who;
+	int	which;
 	int	tmp;
 
 	if (def == -1)
-		who = 2;
+		which = 2;
 	else
-		who = 1;
-	tmp = stk->tab[index].num;
-	if (stk->size / 2 > index)
-		while (stk->tab[0].num != tmp)
-			r_stack(stk, who);
+		which = 1;
+	tmp = src_stack->tab[index].num;
+	if (src_stack->size / 2 > index)
+		while (src_stack->tab[0].num != tmp)
+			r_stack(src_stack, which);
 	else
 	{
-		while (stk->tab[0].num != tmp)
-			rev_r_stack(stk, who);
+		while (src_stack->tab[0].num != tmp)
+			rev_r_stack(src_stack, which);
 	}
-	p_stack(stk, stk1, who);
-	if (who == 1)
+	p_stack(src_stack, dst_stack, which);
+	if (which == 1)
 	{
-		if (stk1->tab[0].rank <= def)
-			r_stack(stk1, 2);
+		if (dst_stack->tab[0].rank <= def)
+			r_stack(dst_stack, 2);
 	}
 	return (-1);
 }
@@ -75,12 +75,12 @@ void	sorting(t_stack *a, t_stack *b)
 	int	def;
 
 	def = 0;
+	if (a->size <= 6)
+		return (mini_sort(a, b));
 	if (a->size <= 100)
 		rang = 15;
 	else
-		rang = 25;
-	if (a->size <= 5)
-		return (mini_sort(a, b));
+		rang = 30;
 	while (a->size > 0)
 	{
 		cheap_push(a, b, best_choice(a, rang + def), def);

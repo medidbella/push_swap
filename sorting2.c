@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:27:53 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 19:25:55 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:10:06 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	mini_sort(t_stack *a, t_stack *b)
 		exit(0);
 	}
 	while (a->size != 3)
-		cheap_push(a, b, find_smalest(a), -37);
+		cheap_push(a, b, find_smalest(a), -2);
 	micro_sort(a);
-	if (b->tab[0].num < b->tab[1].num)
-		swap_stack(b, 2);
 	while (b->size)
 		p_stack(b, a, 2);
 	free(a->tab);

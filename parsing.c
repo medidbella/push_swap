@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 22:09:48 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:34:21 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,19 @@ void	double_check(t_stack *stk)
 
 void	initializer(t_stack *stk, char **strs, int nb)
 {
-	int	i;
+	int	index;
 
 	stk->tab = malloc(sizeof(t_blk) * (nb));
 	if (!stk->tab)
 		error_handler(strs, NULL);
 	stk->size = nb;
-	i = 0;
-	while (i < nb)
+	index = 0;
+	while (index < nb)
 	{
-		stk->tab[i].rank = -1;
-		i++;
-	}
-	i = 0;
-	while (i < nb)
-	{
-		if (my_strlen(strs[i]) > 12)
+		if (my_strlen(strs[index]) > 12)
 			error_handler(NULL, stk->tab);
-		stk->tab[i].num = my_atoi(strs[i], stk->tab);
-		i++;
+		stk->tab[index].num = my_atoi(strs[index], stk->tab);
+		index++;
 	}
 	free_args(strs, nb);
 	double_check(stk);
@@ -60,42 +54,42 @@ void	initializer(t_stack *stk, char **strs, int nb)
 
 int	number_checker(char **strs)
 {
-	int	j;
-	int	i;
-	int	sign;
+	int	str_iter;
+	int	char_iter;
+	int	guarder;
 
-	j = 0;
-	while (strs[j])
+	str_iter = 0;
+	while (strs[str_iter])
 	{
-		if (strs[j][0] == '\0')
+		if (strs[str_iter][0] == '\0')
 			return (0);
-		sign = 0;
-		i = 0;
-		while (strs[j][i])
+		guarder = 0;
+		char_iter = 0;
+		while (strs[str_iter][char_iter])
 		{
-			if (is_what(strs[j][i], 0) && sign > 0)
+			if (what_is_it(strs[str_iter][char_iter], 0) && guarder > 0)
 				return (0);
-			if (is_what(strs[j][i], 3))
-				sign++;
+			if (what_is_it(strs[str_iter][char_iter], 3))
+				guarder++;
 			else
 				return (0);
-			i++;
+			char_iter++;
 		}
-		j++;
+		str_iter++;
 	}
 	return (1);
 }
 
 int	is_sorted(t_blk *blk, int size)
 {
-	int	i;
+	int	index;
 
-	i = 0;
-	while (i < size - 1)
+	index = 0;
+	while (index < size - 1)
 	{
-		if (blk[i].num > blk[i + 1].num)
+		if (blk[index].num > blk[index + 1].num)
 			return (0);
-		i++;
+		index++;
 	}
 	return (1);
 }

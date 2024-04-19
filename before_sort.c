@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 00:18:17 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 14:47:00 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 09:56:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,115 +14,124 @@
 
 int	get_smallest_hepler(t_blk *blk, int size, int *index)
 {
-	int	i;
-	int	j;
+	int	last_unranked;
+	int	unranked_numbers;
 
-	i = 0;
-	j = 0;
-	while (i < size)
+	last_unranked = 0;
+	unranked_numbers = 0;
+	while (last_unranked < size)
 	{
-		if (blk[i].rank == -1)
+		if (blk[last_unranked].rank == -1)
 		{
-			j++;
-			*index = i;
+			unranked_numbers++;
+			*index = last_unranked;
 		}
-		i++;
+		last_unranked++;
 	}
-	return (j);
+	return (unranked_numbers);
 }
 
 int	get_smallest(t_blk *blk, int size)
 {
 	int	index;
-	int	i;
-	int	j;
+	int	result_index;
+	int	helper_index;
+	int	not_ranked;
 
-	j = get_smallest_hepler(blk, size, &index);
-	if (j == 1)
+	not_ranked = get_smallest_hepler(blk, size, &index);
+	if (not_ranked == 1)
 		return (index);
-	else if (j == 0)
+	else if (not_ranked == 0)
 		return (-1);
-	j = 0;
-	i = 0;
-	while (j < size)
+	helper_index = 1;
+	result_index = 0;
+	while (helper_index < size)
 	{
-		if ((blk[i].num > blk[j].num || blk[i].rank != -1)
-			&& (blk[j].rank == -1))
-			i = j;
-		j++;
+		if ((blk[result_index].num > blk[helper_index].num
+				|| blk[result_index].rank != -1)
+			&& (blk[helper_index].rank == -1))
+			result_index = helper_index;
+		helper_index++;
 	}
-	return (i);
+	return (result_index);
 }
 
 void	ranker(t_blk *blk, int size)
 {
-	int	stp;
-	int	r;
+	int	index;
+	int	smalest_index;
+	int	current_rank;
 
-	r = 0;
+	current_rank = 0;
+	index = 0;
+	while (index < size)
+	{
+		blk[index].rank = -1;
+		index++;
+	}
 	while (1)
 	{
-		stp = get_smallest(blk, size);
-		if (stp == -1)
+		smalest_index = get_smallest(blk, size);
+		if (smalest_index == -1)
 			break ;
-		blk[stp].rank = r;
-		r++;
+		blk[smalest_index].rank = current_rank;
+		current_rank++;
 	}
 }
 
 char	*split_and_fill(char *arg, int *ptr)
 {
 	char		*res;
-	static int	x;
-	int			l;
-	int			h;
+	static int	static_index;
+	int			len;
+	int			temp;
 
 	if (*ptr == -1)
-		x = 0;
-	l = 0;
-	while (is_what(arg[x], 1))
-		x++;
-	while (!is_what(arg[x], 1) && arg[x])
+		static_index = 0;
+	len = 0;
+	while (what_is_it(arg[static_index], 1))
+		static_index++;
+	while (!what_is_it(arg[static_index], 1) && arg[static_index])
 	{
-		x++;
-		l++;
+		static_index++;
+		len++;
 	}
-	h = x;
-	*ptr = x;
-	res = malloc(sizeof(char) * (l + 1));
+	temp = static_index;
+	*ptr = static_index;
+	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
-	res[l] = 0;
-	while (l >= 0)
-		res[--l] = arg[--h];
+	res[len] = 0;
+	while (len >= 0)
+		res[--len] = arg[--temp];
 	return (res);
 }
 
-char	**my_split(char **args, int nb, int c)
+char	**my_split(char **args, int nb, int av_index)
 {
-	int		i;
+	int		res_index;
 	char	**res;
-	int		l;
+	int		iter;
 
-	i = 0;
-	l = 0;
-	res = malloc(sizeof(char *) * (c + 1));
+	res_index = 0;
+	iter = 0;
+	res = malloc(sizeof(char *) * (av_index + 1));
 	if (!res)
 		error_handler(NULL, NULL);
-	res[c] = NULL;
-	c = 1;
-	while (c <= nb)
+	res[av_index] = NULL;
+	av_index = 1;
+	while (av_index <= nb)
 	{
-		res[i] = split_and_fill(args[c], &l);
-		checker(res, i);
-		while (is_what(args[c][l], 1))
-			l++;
-		if (args[c][l] == '\0')
+		res[res_index] = split_and_fill(args[av_index], &iter);
+		checker(res, res_index);
+		while (what_is_it(args[av_index][iter], 1))
+			iter++;
+		if (args[av_index][iter] == '\0')
 		{
-			l = -1;
-			c++;
+			iter = -1;
+			av_index++;
 		}
-		i++;
+		res_index++;
 	}
 	return (res);
 }

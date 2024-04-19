@@ -6,13 +6,13 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:49:44 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/18 12:40:09 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:51:18 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_what(char c, int wich)
+int	what_is_it(char c, int wich)
 {
 	if (wich == 1)
 		return (c == 32 || (c >= 9 && c <= 13));
@@ -53,7 +53,7 @@ int	my_atoi(char *str, t_blk *ptr)
 	i = 0;
 	result = 0;
 	sign = 1;
-	if (is_what(str[i], 0))
+	if (what_is_it(str[i], 0))
 	{
 		if (str[i] == '-')
 			sign = -1;
@@ -73,41 +73,42 @@ int	my_atoi(char *str, t_blk *ptr)
 
 int	my_strlen(char *str)
 {
-	int	i;
-	int	o;
+	int	index;
+	int	real_len;
 
-	o = 0;
-	i = 0;
-	while (str[i] == '0' || is_what(str[i], 0))
-		i++;
-	while (str[i])
+	real_len = 0;
+	index = 0;
+	while (str[index] == '0' || what_is_it(str[index], 0))
+		index++;
+	while (str[index])
 	{
-		o++;
-		i++;
+		real_len++;
+		index++;
 	}
-	return (o);
+	return (real_len);
 }
 
-int	counter(char **args, int nb)
+int	counter(char **args, int argument_number)
 {
 	int	count;
-	int	i;
-	int	j;
+	int	iter;
+	int	index;
 
-	j = 1;
+	index = 1;
 	count = 0;
-	while (j <= nb)
+	while (index <= argument_number)
 	{
-		i = 0;
-		if (!is_what(args[j][0], 1))
+		iter = 0;
+		if (!what_is_it(args[index][0], 1))
 			count++;
-		while (args[j][i])
+		while (args[index][iter])
 		{
-			if (!is_what(args[j][i], 1) && is_what(args[j][i - 1], 1))
+			if (!what_is_it(args[index][iter], 1) &&
+				what_is_it(args[index][iter - 1], 1) && index)
 				count++;
-			i++;
+			iter++;
 		}
-		j++;
+		index++;
 	}
 	return (count);
 }
