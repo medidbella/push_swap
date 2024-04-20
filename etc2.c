@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:15:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 19:26:57 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 22:52:50 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	checker(char **args, int index)
 		error_handler(args, NULL);
 }
 
-char	*mini_joiner(char *str, char add_me)
+char	*mini_joiner(char *str, char add_me, t_blk *free_me, t_blk *me_too)
 {
 	int		index;
 	char	*res;
@@ -69,6 +69,11 @@ char	*mini_joiner(char *str, char add_me)
 	index = 0;
 	len = ft_strlen(str);
 	res = malloc(sizeof(char) * len + 2);
+	if (!res)
+	{
+		free(free_me),
+		error_handler(NULL, me_too);
+	}
 	res[len + 1] = 0;
 	res[len] = add_me;
 	if (!str)

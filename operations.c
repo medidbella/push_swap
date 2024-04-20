@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:10:43 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/19 10:46:49 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 21:00:15 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	r_stack(t_stack *stk, int which)
 	int		i;
 
 	i = 0;
+	if (stk->size <= 1)
+		return ;
 	tmp = stk->tab[0];
 	while (i < stk->size - 1)
 	{

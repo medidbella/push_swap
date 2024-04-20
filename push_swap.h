@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:08:46 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/19 10:24:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 22:48:44 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void		swap_stack(t_stack *stk, int which);
 void		p_stack(t_stack *from, t_stack *to, int which);
 void		r_stack(t_stack *stk, int which);
 void		rev_r_stack(t_stack *stk, int which);
-void		print_stack(t_stack *stack);
 char		**my_split(char **args, int nb, int c);
 int			number_checker(char **strs);
 int			what_is_it(char c, int wich);
@@ -57,7 +56,7 @@ int			cheap_push(t_stack *stk, t_stack *stk1, int index, int def);
 void		checker(char **args, int index);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *orig, char *comp);
-char		*mini_joiner(char *str, char add_me);
+char		*mini_joiner(char *str, char add_me, t_blk *free_me, t_blk *me_too);
 int			get_operatoin_id(char	*my_operatoin);
 
 #endif

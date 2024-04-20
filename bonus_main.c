@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:43:10 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/17 19:27:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/19 22:51:57 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_get_operatoin(t_blk *free_me, t_blk *me_to, int *state)
 		guarder = read(0, buf, 1);
 		if (guarder != 1)
 			break ;
-		res = mini_joiner(res, buf[0]);
+		res = mini_joiner(res, buf[0], free_me, me_to);
 	}
 	if (guarder == -1)
 	{
@@ -134,7 +134,6 @@ int	main(int ac, char **av)
 		return (0);
 	arg_number = counter(av, ac - 1);
 	args = my_split(av, ac - 1, arg_number);
-	number_checker(args);
 	if (!number_checker(args))
 		error_handler(args, NULL);
 	initializer(&a, args, arg_number);
