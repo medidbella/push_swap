@@ -6,7 +6,7 @@ FILES = before_sort.c parsing.c etc.c etc2.c sorting.c operations.c sorting2.c
 OBJ_FILES = $(FILES:.c=.o)
 MAIN_OBJ = $(MAIN:.c=.o)
 B_MAIN_OBJ = $(B_MAIN:.c=.o)
-C_flags =  -Wall -Wextra -Werror  
+C_flags =  -Wall -Wextra -Werror 
 
 $(PROG): $(OBJ_FILES) $(MAIN_OBJ)
 	cc $(C_flags) $(OBJ_FILES) $(MAIN_OBJ) -o $(PROG)

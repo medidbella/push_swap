@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:43:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/19 20:40:39 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:57:04 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	find_bigest(t_stack *stk)
 	return (result);
 }
 
-int	cheap_push(t_stack *src_stack, t_stack *dst_stack, int index, int def)
+void	cheap_push(t_stack *src_stack, t_stack *dst_stack, int index, int def)
 {
 	int	which;
 	int	tmp;
@@ -52,7 +52,6 @@ int	cheap_push(t_stack *src_stack, t_stack *dst_stack, int index, int def)
 		if (dst_stack->tab[0].rank <= def)
 			r_stack(dst_stack, 2);
 	}
-	return (-1);
 }
 
 int	best_choice(t_stack *stk, int rang)

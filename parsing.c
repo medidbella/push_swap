@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:12:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/19 21:02:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/21 12:07:08 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	initializer(t_stack *stk, char **strs, int nb)
 		stk->tab[index].num = my_atoi(strs[index], stk->tab);
 		index++;
 	}
-	free_args(strs, nb);
+	free_args(strs);
 	double_check(stk);
 }
 
@@ -93,14 +93,14 @@ int	is_sorted(t_blk *blk, int size)
 	return (1);
 }
 
-void	free_args(char **args, int size)
+void	free_args(char **args)
 {
 	int	i;
 
 	i = 0;
-	while (i < size - 1)
+	while (args[i])
 	{
-		free(args[i++]);
+		free(args[i]);
 		i++;
 	}
 	free(args);
