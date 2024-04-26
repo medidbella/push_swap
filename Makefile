@@ -2,7 +2,7 @@ PROG = push_swap
 B_PROG = checker
 B_MAIN = bonus_main.c
 MAIN = mondatory_main.c
-FILES = before_sort.c parsing.c etc.c etc2.c sorting.c operations.c sorting2.c
+FILES = spliting.c parsing.c extra_functoins.c extra_functoins2.c sorting.c operations.c sorting2.c ranking.c
 OBJ_FILES = $(FILES:.c=.o)
 MAIN_OBJ = $(MAIN:.c=.o)
 B_MAIN_OBJ = $(B_MAIN:.c=.o)
