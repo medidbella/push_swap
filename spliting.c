@@ -6,13 +6,13 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 00:18:17 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/25 16:14:46 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/26 09:01:41 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void result_filler(char *src, char *dst, int src_index, int dst_index)
+void	result_filler(char *src, char *dst, int src_index, int dst_index)
 {
 	--src_index;
 	--dst_index;

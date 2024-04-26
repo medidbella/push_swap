@@ -16,7 +16,7 @@ bonus: $(B_PROG)
 $(B_PROG): $(OBJ_FILES) $(B_MAIN_OBJ)
 	cc $(C_flags) $(OBJ_FILES) $(B_MAIN_OBJ) -o $(B_PROG)
 
-all: $(PROG) bonus
+all: $(PROG) $(B_PROG)
 
 clean:
 	rm -f $(OBJ_FILES) $(B_MAIN_OBJ) $(MAIN_OBJ)

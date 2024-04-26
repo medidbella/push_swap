@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:43:10 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/21 18:25:19 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/26 09:12:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_get_operatoin(t_blk *free_me, t_blk *me_to, int *state)
 	}
 	if (guarder == -1)
 	{
+		free(res);
 		free(free_me);
 		error_handler(NULL, me_to);
 	}
@@ -146,4 +147,7 @@ int	main(int ac, char **av)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
+	free(a.tab);
+	free(b.tab);
+	return (0);
 }

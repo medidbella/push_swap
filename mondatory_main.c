@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 23:34:32 by midbella          #+#    #+#             */
-/*   Updated: 2024/04/21 18:25:24 by midbella         ###   ########.fr       */
+/*   Updated: 2024/04/26 09:15:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ int	main(int ac, char **av)
 		error_handler(NULL, a.tab);
 	b.size = 0;
 	sorting(&a, &b);
+	return (0);
 }
